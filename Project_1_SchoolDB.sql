@@ -21,7 +21,7 @@ B. "HomeContact" - Home addresses & phone numbers
 
 C. "Parents" - Parent's daytime contact information
 
-D. Conditions Table
+D. AilmentsTable
 - what to do for specific conditions
 
  */
@@ -36,26 +36,66 @@ VALUES
 ('Kelly', 'Charlie', NULL, '2002-04-01'),
 ('Reynolds', 'Dennis', NULL, '2002-04-01'),
 ('Reynolds', 'Deandra', 'Sweet Dee', '2002-04-01'),
-('MacDonald', 'Ronald', 'Mac', '2002-04-01')
+('MacDonald', 'Ronald', 'Mac', '2002-04-01');
 
---#####--
+--##### Table Creation #####--
 DROP TABLE IF EXISTS HomeContact;
 
 CREATE TABLE HomeContact
-(LastName varchar,  FirstName varchar, NickName varchar, BirthDate date, StudentID serial);
+(LastName varchar,  FirstName varchar, ParentLastName varchar, ParentFirstName varchar, Address varchar);
 
-INSERT INTO HomeContact
-VALUES
-('Kelly', 'Charlie', NULL, '2002-04-01'),
+INSERT INTO HomeContact VALUES
+('Kelly', 'Charlie', 'Kelly', 'Bonnie', '435 Franklin St. #2, Philidelphia'),
+('Reynolds', 'Dennis', 'Reynolds', 'Frank', '2893 Forrest Road, Philidelphia'),
+('Reynolds', 'Deandra', 'Reynolds', 'Frank', '2893 Forrest Road, Philidelphia'),
+('MacDonald', 'Ronald', 'MacDonald', NULL, NULL);
 
 --#####--
 
 DROP TABLE IF EXISTS Parents;
 
 CREATE TABLE Parents
-(LastName varchar,  FirstName varchar, Occupation varchar, PhoneNumber int);
+(LastName varchar,  FirstName varchar, Occupation varchar, PhoneNumber varchar);
 
-INSERT INTO Parents
-VALUES
-('Reynolds', 'Frank', 5550104310),
-('Kelly', 'Bonnie', 5550104310),
+INSERT INTO Parents VALUES
+('Reynolds', 'Frank', 'Manufacturing', '5550104310'),
+('Reynolds', 'Barbara', NULL, '555079402'), 
+('Kelly', 'Bonnie', 'Waitress', '5550104310'),
+('MacDonald', NULL, NULL, NULL);
+
+DROP TABLE IF EXISTS Ailments;
+
+CREATE TABLE Ailments
+(StudentID int, Ailment1 varchar, Notes varchar);
+
+INSERT INTO Ailments VALUES
+('1', 'ADHD', 'Do not let him have cheese or be around glue.'),
+('2', NULL, NULL),
+('3', 'scoliosis', 'Must wear back brace'),
+('4', NULL, NULL);
+
+ --##### Queries #####--
+ SELECT * FROM StudentInformation;
+ SELECT * FROM HomeContact;
+ SELECT * FROM Parents;
+ SELECT * FROM Ailments;
+
+ -- Oh no, Sweet Dee showed up with a stomach ache. What's her actual name again?
+
+ SELECT FirstName, LastName 
+ FROM StudentInformation 
+ WHERE NickName LIKE 'Sweet Dee';
+
+ -- Great, better track down her parents 
+SELECT *
+FROM Parents
+LEFT JOIN StudentInformation
+ON StudentInformation.LastName = Parents.LastName
+WHERE StudentInformation.LastName = 'Reynolds' AND StudentInformation.FirstName = 'Deandra';
+
+ -- Charlie Kelly came in and is not looking too good. Does he live close enough that I can let him go home? 
+ -- And what's his deal anyways?
+
+
+
+ 
