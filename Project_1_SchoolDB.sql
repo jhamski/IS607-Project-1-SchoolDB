@@ -42,26 +42,28 @@ VALUES
 DROP TABLE IF EXISTS HomeContact;
 
 CREATE TABLE HomeContact
-(LastName varchar,  FirstName varchar, ParentLastName varchar, ParentFirstName varchar, Address varchar);
+(StudentID int, LastName varchar,  FirstName varchar, ParentLastName varchar, ParentFirstName varchar, Address varchar);
 
 INSERT INTO HomeContact VALUES
-('Kelly', 'Charlie', 'Kelly', 'Bonnie', '435 Franklin St. #2, Philidelphia'),
-('Reynolds', 'Dennis', 'Reynolds', 'Frank', '2893 Forrest Road, Philidelphia'),
-('Reynolds', 'Deandra', 'Reynolds', 'Frank', '2893 Forrest Road, Philidelphia'),
-('MacDonald', 'Ronald', 'MacDonald', NULL, NULL);
+('1','Kelly', 'Charlie', 'Kelly', 'Bonnie', '435 Franklin St. #2, Philidelphia'),
+('2','Reynolds', 'Dennis', 'Reynolds', 'Frank', '2893 Forrest Road, Philidelphia'),
+('3','Reynolds', 'Deandra', 'Reynolds', 'Frank', '2893 Forrest Road, Philidelphia'),
+('4','MacDonald', 'Ronald', 'MacDonald', NULL, NULL);
 
 --#####--
 
 DROP TABLE IF EXISTS Parents;
 
 CREATE TABLE Parents
-(LastName varchar,  FirstName varchar, Occupation varchar, PhoneNumber varchar);
+(StudentID int, LastName varchar,  FirstName varchar, Occupation varchar, PhoneNumber varchar);
 
 INSERT INTO Parents VALUES
-('Reynolds', 'Frank', 'Manufacturing', '5550104310'),
-('Reynolds', 'Barbara', NULL, '555079402'), 
-('Kelly', 'Bonnie', 'Waitress', '5550104310'),
-('MacDonald', NULL, NULL, NULL);
+('2', 'Reynolds', 'Frank', 'Manufacturing', '5550104310'),
+('2','Reynolds', 'Barbara', NULL, '555079402'), 
+('3', 'Reynolds', 'Frank', 'Manufacturing', '5550104310'),
+('3','Reynolds', 'Barbara', NULL, '555079402'), 
+('1','Kelly', 'Bonnie', 'Waitress', '5550104310'),
+('4','MacDonald', NULL, NULL, NULL);
 
 DROP TABLE IF EXISTS Ailments;
 
@@ -90,7 +92,7 @@ INSERT INTO Ailments VALUES
 SELECT *
 FROM Parents
 LEFT JOIN StudentInformation
-ON StudentInformation.LastName = Parents.LastName
+ON StudentInformation.StudentID = Parents.StudentID
 WHERE StudentInformation.LastName = 'Reynolds' AND StudentInformation.FirstName = 'Deandra';
 
  -- Charlie Kelly came in and is not looking too good. Does he live close enough that I can let him go home? 
