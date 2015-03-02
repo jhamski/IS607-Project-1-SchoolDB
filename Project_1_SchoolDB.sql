@@ -110,7 +110,7 @@ DELETE
 FROM Students
 WHERE Nickname LIKE 'Mac';
 
-SELECT * FROM HomeContact
+SELECT * FROM HomeContact;
 -- Mac is deleted from all tables
 
 -- Sometimes a child has medication they are prescribed and the school nurse needs to look up more information on it. 
