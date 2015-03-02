@@ -113,6 +113,22 @@ WHERE Nickname LIKE 'Mac';
 SELECT * FROM HomeContact
 -- Mac is deleted from all tables
 
+-- Sometimes a child has medication they are prescribed and the school nurse needs to look up more information on it. 
+-- So, let's load in the National Drug Code Directory from http://www.fda.gov/Drugs/InformationOnDrugs/ucm142438.htm
+
+DROP TABLE IF EXISTS DrugDirectory;
+
+CREATE TABLE DrugDirectory
+(PRODUCTID varchar, PRODUCTNDC varchar, PRODUCTTYPENAME varchar, PROPRIETARYNAME varchar, PROPRIETARYNAMESUFFIX varchar, NONPROPRIETARYNAME varchar, 
+DOSAGEFORMNAME varchar, ROUTENAME varchar, STARTMARKETINGDATE varchar, ENDMARKETINGDATE varchar, MARKETINGCATEGORYNAME varchar, APPLICATIONNUMBER varchar, 
+LABELERNAME varchar, SUBSTANCENAME varchar, ACTIVE_NUMERATOR_STRENGTH varchar, ACTIVE_INGRED_UNIT varchar, PHARM_CLASSES varchar, DEASCHEDULE varchar);
+
+COPY DrugDirectory FROM '/Users/Shared/drugdirectory.csv' DELIMITERS ',' CSV;
+
+-- How many drugs are in this thing?
+
+SELECT COUNT(*) FROM DrugDirectory;
+
 /*
 Short requirement for extending functionality.
 
