@@ -1,2 +1,3 @@
-# Project_1_IS607
-Project for IS607
+IS607 Data Acquisition and Management 
+Project 1
+Create a database for a school
